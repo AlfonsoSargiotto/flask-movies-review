@@ -10,7 +10,7 @@ class Movie(db.Model):
     director_id = db.Column(db.Integer(), db.ForeignKey("director.id"), default=1, nullable=False)
     category_id = db.Column(db.Integer(), db.ForeignKey("category.id"), default=1, nullable=False)
     show_type = db.Column(db.String(20))
-    cast = db.Column(db.String(255))
+    cast = db.Column(db.String(1000))
     country = db.Column(db.String(150))
     release_year = db.Column(db.Integer())
     rating = db.Column(db.String(50))
