@@ -17,8 +17,9 @@ from wtforms.validators import (
     DataRequired,
     Length,
     ValidationError,
+    NumberRange,
 )
-from models import Director, Movie
+from app.models import Director, Movie
 
 
 class DirectorForm(FlaskForm):
@@ -47,11 +48,15 @@ class MovieForm(FlaskForm):
     )
     director_id = "[]"
     category_id = SelectField(
-        "Category", validators=[DataRequired(), "Please choose a category"], choices=[]
+        "Category",
+        validators=[DataRequired()],
+        render_kw={"placeholder": "Please choose a category"},
+        choices=[],
     )
     show_type = SelectField(
         "Show Type",
-        validators=[DataRequired(), "Please choose show type"],
+        validators=[DataRequired()],
+        render_kw={"placeholder": "Please choose show type"},
         choices=["Movie", "TV Show"],
     )
     cast = StringField(
@@ -65,13 +70,18 @@ class MovieForm(FlaskForm):
         render_kw={"placeholder": "Country where was produced"},
     )
     release_year = IntegerField(
-        validators=[DataRequired(), Length(min=4, max=4)],
+        validators=[DataRequired(), NumberRange(min=1850, max=2023)],
         render_kw={"placeholder": "Release year (YYYY format)"},
     )
     rating = SelectField(
         "Rating",
-        validators=[DataRequired(), "Please choose an option"],
+        validators=[DataRequired()],
+        render_kw={"placeholder": "Please choose an option"},
         choices=["PG", "PG-13", "R", "TV-14", "TV-G", "TV-M", "TV-MA", "TV-Y", "TV-Y7"],
+    )
+    score = IntegerField(
+        validators=[DataRequired(), NumberRange(min=0, max=10)],
+        render_kw={"placeholder": "Release year (YYYY format)"},
     )
     duration = StringField(
         "Movie-TV Show duration",
