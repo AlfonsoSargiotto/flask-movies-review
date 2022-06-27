@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% set activate_page = 'Home' %}
+
+{% set title = 'Home' %}
+
+{% block content %}
+
+<h1 class="home-title">Welcome to Netflix-Movie-Review</h1>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md">
+            <p> Here you will find more than 10.000 movies and tv shows reviews, with all their information: cast,
+                director, rating, category, duration and our premium score system created by our specialists and fans.
+                Come and take a look to our features, you can start checking out our <b><a
+                        href="{{url_for('top_ten')}}"> top-ten collection</a></b> or search something in the search bar from the top.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

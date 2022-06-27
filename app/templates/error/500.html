@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% set title = "500 Internal Server Error" %}
+
+{% block content %}
+
+<div class="jumbotron jumbotron-fluid mb-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-md">
+                <h1 class="display-3">Oh no!</h1>
+                <h3><span class="text-muted"><b>Error</b> 500 (Internal Server Error)</span></h3>
+                <p class="lead">We are so sorry but we are facing some issues. Please, come back later!
+                <p>
+            </div>
+            <div class="col-md" style="width: 330px;"">
+                <img src=" {{ url_for('static', filename='images/worker_500.jpg' ) }}" class="img-fluid"
+                alt="Auctioneer Bidding">
+                <p class="blockquote-footer">
+                    <a href='https://www.freepik.com/vectors/server-error'>Server error vector created by storyset -
+                        www.freepik.com</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

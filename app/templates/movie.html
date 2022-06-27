@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% set activate_page = 'Movie' %}
+
+{% set title = 'Movie Details' %}
+
+
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row text-center">
+        <div class="col-md">
+            <!-- Post content-->
+            <article>
+                <!-- Post header-->
+                <header class="mb-4">
+                    <!-- Post title-->
+                    <h1 class="fw-bolder mb-1">{{movie.title}}</h1>
+                    <hr>
+                    <!-- Post meta content-->
+                    <div class="text-muted fst-italic mb-2"> <b>Directors:</b> {{movie.director.name}}</div>
+                    <!-- Post categories-->
+                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">{{movie.show_type}}</a>
+                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">{{movie.rating}}</a>
+                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">{{movie.duration}}</a>
+                    <hr>
+                </header>
+                <!-- Preview image figure-->
+                <figure class="mb-4"><img class="img-fluid" width="500" height="250"
+                        src="{{ url_for('static', filename='images/movie_img.png') }}" alt="{{movie.title}}"></figure>
+                <!-- Post content-->
+                <section class="mb-5 align-left" style="text-align:justify;">
+                    <hr>
+                    <p>Cast: {{movie.cast}}</p>
+                    <hr>
+                    <p class="fs-5 mb-4">{{movie.description}}</p>
+                    <p class="fs-5 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur mollis,
+                        neque sed ultrices condimentum, tortor ante mattis ex, eget laoreet purus justo vel nibh. Proin
+                        sit amet neque a diam sollicitudin lacinia ut sit amet magna. Integer aliquet mollis risus id
+                        suscipit. Integer et vehicula turpis. Phasellus tempus aliquet quam, malesuada pharetra neque
+                        porttitor eget. Pellentesque egestas urna non augue finibus efficitur. Aliquam a pulvinar augue,
+                        in volutpat lacus. Donec sit amet rutrum diam. Curabitur imperdiet leo tincidunt magna sagittis
+                        malesuada. Vivamus interdum pharetra libero, ac lobortis nulla tristique vitae.
+
+                        Integer elementum diam non justo dignissim suscipit. Praesent lacinia in enim ac eleifend.
+                        Nullam erat neque, pulvinar eget ante sit amet, pretium dignissim ligula. Curabitur fermentum
+                        vel enim et tempor. Sed at metus sed enim placerat porttitor. Sed malesuada mattis ornare.
+                        Mauris cursus accumsan tincidunt. Fusce id dui fringilla elit vulputate dapibus ac quis arcu.
+                        Nulla eget felis et leo elementum pretium sagittis sed quam. Etiam ultrices suscipit urna id
+                        tempus. Mauris posuere, nulla lacinia rhoncus dapibus, magna ligula consequat nibh, sit amet
+                        viverra sapien sapien eu felis. Fusce posuere justo odio, vitae sollicitudin neque vehicula ut.
+                        Sed non mollis augue.
+                    </p>
+                </section>
+            </article>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

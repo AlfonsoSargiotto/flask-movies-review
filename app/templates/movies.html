@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% set activate_page = 'Movies' %}
+
+{% set title = 'All Movies' %}
+
+
+
+{% block content %}
+{% if search_parameter %}
+<h2 class="results-title">Showing results for: <b><i>"{{search_parameter}}"</i></b></h2>
+{% endif %}
+
+<!-- Movies table -->
+{% if movies.items %}
+<div class="table-responsive">
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col" class="col-header">#</th>
+      <th scope="col" class="col-header">Title</th>
+      <th scope="col" class="col-header">Category</th>
+      <th scope="col" class="col-header">Cast</th>
+      <th scope="col" class="col-header">Director</th>
+      <th scope="col" class="col-header">Rating</th>
+      <th scope="col" class="col-header">Duration</th>
+      <th scope="col" class="col-header">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    {%for movie in movies.items%}
+    <tr>
+      <td scope="row">{{loop.index}}</td>
+      <td scope="row">
+        <h5><a href="{{ url_for('movie', movie_id=movie.id) }}">
+            <b>{{movie.title}}</b></a></h5>
+      </td>
+      <td scope="row"><b>{{movie.category.name}}</b></td>
+      <td scope="row">{% if movie.cast %}{{movie.cast|truncate(40, True)}} {% else %} - {% endif %}</td>
+      <td scope="row">{{movie.director.name|truncate(40, True)}}</td>
+      <td scope="row">{{movie.rating}}</td>
+      <td scope="row">{{movie.duration}}</td>
+      <td scope="row">{{movie.description|truncate(80, True)}}</td>
+    </tr>
+    <tr>
+      {%endfor%}
+  </tbody>
+</table>
+</div>
+<!-- End Movies table -->
+
+<!-- Pagination block code-->
+<div class="text-right">
+  <a href="{{ url_for('movie', page=movies.prev_num, search_parameter=search_parameter) }}" class="btn btn-outline-dark 
+     {% if movies.page == 1 %}disabled{% endif %}">
+    &laquo;
+  </a>
+  <!-- Loop through the number of pages to display a link for each-->
+  {% for page_num in movies.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+  {% if page_num %}
+  <!-- Check for the active page and set the link to "Active"-->
+  {% if movies.page == page_num %}
+  <a href="{{ url_for('movie', page=page_num, search_parameter=search_parameter) }}" class="btn btn-dark">
+    {{ page_num }}
+  </a>
+  {% else %}
+  <a href="{{ url_for('movie', page=page_num, search_parameter=search_parameter) }}" class="btn btn-outline-dark">
+    {{ page_num }}
+  </a>
+  {% endif %}
+  {% else %}
+  ...
+  {% endif %}
+  {% endfor %}
+  <a href="{{ url_for('movie', page=movies.next_num, search_parameter=search_parameter) }}" class="btn btn-outline-dark 
+     {% if movies.page == movies.pages %}disabled{% endif %}">
+    &raquo;
+  </a>
+</div>
+<p class="text-right mt-3">
+  Showing page {{ movies.page }} of {{ movies.pages }}
+</p>
+<!-- End Pagination block code-->
+
+{% else %}
+
+<h1>no results</h1>
+
+{% endif %}
+
+
+{% endblock %}

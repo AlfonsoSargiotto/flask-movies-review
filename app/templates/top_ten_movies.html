@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% set activate_page = 'Top Ten Movies' %}
+
+{% set title = 'Top 10 Movies' %}
+
+
+
+{% block content %}
+
+<div class="row mb-2 w-100">
+    {% for movie in movies %}
+    <div class="col-md-6 top-ten-col">
+        <div class="card mt-1" style="border:2px solid">
+            <div class="row w-100">
+                <div class="col-md-4 pr-0 pl-0">
+                    <a href="{{ url_for('movie', movie_id=movie.id) }}">
+                        <img class="card-img-top img-fluid" src="{{ url_for('static', filename='images/movie_img.png') }}"
+                            alt="" style="border:1px solid;">
+                    </a>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <strong class="d-inline-block text-success">{{movie.show_type}}</strong>
+                        <div class="text-muted mb-2">{{movie.duration}}</div>
+                        <h2 class="card-title"><a href="{{ url_for('movie', movie_id=movie.id) }}">
+                                {{movie.title}}</a></h2>
+                        <p class="card-text">{{movie.description|truncate(100, True)}}</p>
+                        <p><small class="text-muted mb-2"><b>Directed by</b> {{movie.director.name}}
+                                ({{movie.release_year}})</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
