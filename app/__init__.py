@@ -9,9 +9,9 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = environ.get("SECRET_KEY")
 
 # ERROR HANDLERS
-# from app.errors import page_not_found, internal_server_error
-# app.register_error_handler(404, page_not_found)
-# app.register_error_handler(500, internal_server_error)
+from app.errors import page_not_found, internal_server_error
+app.register_error_handler(404, page_not_found)
+app.register_error_handler(500, internal_server_error)
 
 
 # DB
