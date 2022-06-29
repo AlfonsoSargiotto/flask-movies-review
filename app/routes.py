@@ -21,7 +21,7 @@ def login():
     return render_template("error/404.html")
 
 
-@app.route("/show_error")
+@app.route("/show-error")
 def show_error_500():
     abort(500)
 
@@ -61,11 +61,8 @@ def movie(movie_id=None):
     )
 
 
-@app.route("/movie/top_ten")
+@app.route("/movie/top-ten")
 def top_ten():
     top_ten_movies = Movie.query.order_by(Movie.score.desc()).limit(10)
-    print(top_ten_movies)
 
     return render_template("top_ten_movies.html", movies=top_ten_movies)
-
-
