@@ -12,6 +12,7 @@ from wtforms import (
     SelectField,
     TextAreaField,
     IntegerField,
+    DecimalField,
 )
 from wtforms.validators import (
     DataRequired,
@@ -42,11 +43,16 @@ class DirectorForm(FlaskForm):
 
 class MovieForm(FlaskForm):
     title = StringField(
-        "Full name",
+        "Title",
         validators=[DataRequired(), Length(min=1, max=150)],
         render_kw={"placeholder": "Introduce Movie/TV Show's title"},
     )
-    director_id = "[]"
+    director_id = SelectField(
+        "Director",
+        validators=[DataRequired()],
+        render_kw={"placeholder": "Please choose directors"},
+        choices=[],
+    )
     category_id = SelectField(
         "Category",
         validators=[DataRequired()],
@@ -79,15 +85,16 @@ class MovieForm(FlaskForm):
         render_kw={"placeholder": "Please choose an option"},
         choices=["PG", "PG-13", "R", "TV-14", "TV-G", "TV-M", "TV-MA", "TV-Y", "TV-Y7"],
     )
-    score = IntegerField(
+    score = DecimalField(
         validators=[DataRequired(), NumberRange(min=0, max=10)],
-        render_kw={"placeholder": "Release year (YYYY format)"},
+        render_kw={"placeholder": "Score points"},
+        places=1,
     )
     duration = StringField(
         "Movie-TV Show duration",
         validators=[DataRequired(), Length(min=1, max=255)],
         render_kw={
-            "placeholder": "Movie/TV Show's duration. Can be seasons,episodes or minutes."
+            "placeholder": "Can be seasons,episodes or minutes. E.g: 2 seasons, 135 minutes"
         },
     )
     description = TextAreaField(
@@ -101,7 +108,7 @@ class MovieForm(FlaskForm):
 
     def validate_title(self, title):
         movie = Movie.query.filter_by(title=title.data).first()
-        if movie:
+        if movie and movie.title != title.data:
             raise ValidationError(
                 f"The Movie/TV Show named '{title.data}' is already in our database"
             )
