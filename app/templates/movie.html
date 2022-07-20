@@ -16,7 +16,7 @@
                 <!-- Post header-->
                 <header class="mb-4">
                     <!-- Post title-->
-                    <h1 class="fw-bolder mb-1">{{movie.title}}</h1>
+                    <h1 class="fw-bolder mb-1">{{movie.title}}</h1><i class='fa fa-star small'> {{movie.score | round(1) }}</i> 
                     <hr>
                     <!-- Post meta content-->
                     <div class="text-muted fst-italic mb-2"> <b>Directors:</b> {{movie.director.name}}</div>
@@ -30,7 +30,7 @@
                 <figure class="mb-4"><img class="img-fluid" width="500" height="250"
                         src="{{ url_for('static', filename='images/movie_img.png') }}" alt="{{movie.title}}"></figure>
                 <!-- Post content-->
-                <section class="mb-5 align-left" style="text-align:justify;">
+                <section class="mb-5 align-left movie-description">
                     <hr>
                     <p>Cast: {{movie.cast}}</p>
                     <hr>
@@ -54,6 +54,9 @@
                     </p>
                 </section>
             </article>
+            <a href="{{ url_for('edit_movie', movie_id=movie.id) }}">
+                <button type="button" class="btn btn-warning">Edit this movie</button>
+              </a> 
         </div>
     </div>
 </div>
