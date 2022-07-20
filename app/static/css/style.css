@@ -135,3 +135,8 @@ th {
   font-variant: normal;
   text-transform: none;
 }
+
+.movie-description{
+  text-align:justify;
+  word-wrap: break-word;
+}
